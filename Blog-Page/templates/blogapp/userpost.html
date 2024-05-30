@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+#wrapper{
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+
+</style>
+
+</head>
+<body>
+  <div id="wrapper">
+    {% if posts %}
+    {% for i in posts %}
+    <br>
+   
+          
+<div class="w3-content" style="max-width:1400px">
+
+
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+<div style="width:80%;margin-left: 20px;" class="w3-col l8 s12">
+<br><br>
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+<br>
+    <img style="width:30%;height: 150px;" src="{{i.thumbnail.url}}" alt="Nature" style="width:100%">
+   
+      <h2 style="position:relative;margin-top:-120px;margin-left:300px; text-shadow: 2px 2px 5px #000000 "> <font face = "Times New Roman" size = "50">{{i.title}}</font></h2>
+      
+    
+
+    <div class="w3-container">
+      <br><br>
+      <hr style="border-top: 3px solid #bbb;">
+      <p>{{i.content |safe}}</p>
+      <div class="w3-row">
+        <!--
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+        </div>
+      -->
+       <a href="/delpost/{{i.slug}}">Delete</a>
+       
+       <a href="/updatepost/{{i.slug}}">Update</a>
+          <t style="font-size:10px;margin-top:90px;margin-left :350px;position:relative;">{{i.timestamp}}</t>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+ 
+ 
+ 
+<!-- END BLOG ENTRIES -->
+</div>
+
+
+        <br><br>
+        
+        {% endfor %}
+        {% else %}
+        <center>
+          <h1>You did not post anything yet!!!!</h1>
+        </center>
+        <br><br>
+        <a href="/post">Click here to post a blog</a>
+        {% endif %}
+        <br><br><br>
+        
+       
+       
+    
+       
+
+  </div>
+</body>
+</html>

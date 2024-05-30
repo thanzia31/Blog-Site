@@ -1,0 +1,12 @@
+{% if messages %}
+    {% for message in messages %}
+    <div style="background-color:rgb(144, 238, 196);border-width: 2px;border-color: black;
+    border-radius: 10px;height: 30px;width: 80%; box-shadow:0 0 15px 5px #ccc;"class="alert alert-primary" role="alert" id="msg">
+
+<t style="color: black;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;position:absolute;margin-top: 10px;margin-left: 10px;font-size: large;">         
+<b>{{message}}</b>
+</t> 
+</div>
+    {% endfor %}
+
+{% endif %}

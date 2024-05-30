@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+#wrapper{
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+.navbar{
+            background-color: black;
+            border-radius: 30px;
+            
+        }
+        .navbar ul{
+            overflow: auto;
+        }
+        .navbar li{
+            float:left;
+            list-style: none; 
+            margin: 13px 20px;
+            
+        }
+        .navbar li a{
+            padding: 3px 3px;
+            text-decoration: none;
+            color: white;
+        }
+        .navbar li a:hover{
+            color: red
+        }
+        .search{
+            float: right;
+            color: white;
+            padding: 12px 100px;
+            size: 200cm;
+        }
+        .navbar input{
+            border: 2px solid black;
+            border-radius: 14px;
+            padding: 3px 17px;
+            width: 129px;
+        }
+        
+
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; 
+  margin: 0; 
+}
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+</style>
+
+</head>
+<body>
+ 
+  <header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/about">About</a></li>
+            <div class="dropdown">
+                <button class="dropbtn">Category
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    {% for i in cat %}
+                  <a href="/post/{{i.slug}}">{{i.title}}</a>
+                  
+                  {% endfor %}
+                </div>
+              </div>
+              
+              {% if login %}
+              <li><a href="/accounts/login/index1">Home</a></li>
+              <li><a href="/accounts/logout">Log Out</a></li>
+              {% else %}
+              <li><a href="/">Home</a></li>
+              
+            {% endif %}
+            <div class="search">
+              <form action="{% url 'search_bar' %}">
+                <input type="text" name="q" id="search" placeholder="Search Blogs">
+              </form>
+            </div>
+            
+            
+        </ul>
+    </nav>
+</header>
+<div id="wrapper">
+  {% if queryset %}
+  {% for i in queryset %}
+  <br>
+        
+<div class="w3-content" style="max-width:1400px">
+
+
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+<div style="width:80%;margin-left: 20px;" class="w3-col l8 s12">
+<br><br>
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+<br>
+    <img style="width:30%;height: 150px;" src="{{i.thumbnail.url}}" alt="Nature" style="width:100%">
+   
+      <h2 style="position:relative;margin-top:-120px;margin-left:300px; text-shadow: 2px 2px 5px #000000 "> <font face = "Times New Roman" size = "50">{{i.title}}</font></h2>
+      <h5 style="position:relative;margin-top:-10px;margin-left:450px;"> <a style="text-decoration: none;" href="/authordis/{{i.slug}}" class="w3-opacity">~{{i.author}}</a></h5>
+    
+
+    <div class="w3-container">
+      <br>
+      <hr style="border-top: 3px solid #bbb;">
+      <p>{{i.content |safe}}</p>
+      <div class="w3-row">
+        <!--
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+        </div>
+      -->
+      {% if login %}
+        <form action="{% url 'like_post' i.id  %}" method="POST" id="{{i.id}}" class="like-form">
+            {% csrf_token %}
+    
+            <div class="w3-col m8 s12">
+              
+            <button type="submit"  class="ui button like-btn{{i.id}}" >
+    
+            {% if i.like_field %}
+                Unlike
+            {% else %}
+                Like
+           
+            {% endif %}
+          </button>
+          
+        </div>
+            <br><br>
+            <t style="position: relative;bottom:0px;margin-left: 600px;font-size: medium;font-weight: bold;">Likes:</t>
+            <div style="position: relative;bottom: 25px;margin-left: 650px;font-size: large;font-weight: bold;" class="like-count{{i.id}}">
+              
+            <t>{{i.likes.count}}</t>
+            </div>
+          </form>
+          {% else %}
+          <button>Like</button>
+          <t style="margin-left: 350px;">Likes:{{i.likes.count}}</t>
+          {% endif %}
+          
+          <t style="font-size:10px;margin-top:120px;margin-left :300px;position:relative;">{{i.timestamp}}</t>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+ 
+ 
+ 
+<!-- END BLOG ENTRIES -->
+</div>
+
+
+        <br><br>
+        
+        {% endfor %}
+        {% else %}
+        <center>
+        <h1>No relevent posts Available!!!!</h1>
+      </center>
+        {% endif %}
+        <br><br><br>
+        
+       
+       
+    
+        <script src="https://code.jquery.com/jquery-3.5.1.js" 
+              integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+                crossorigin="anonymous"></script>
+    
+    
+       <script type="text/javascript">
+       
+        $('.like-form').submit(function(e)
+        {
+          e.preventDefault()
+          
+          const post_id=$(this).attr('id')
+          const likeText=$(`.like-btn${post_id}`).text()
+          const trim=$.trim(likeText)
+          console.log(trim)
+          const url = $(this).attr('action')
+          let res;
+          const likes = $(`.like-count${post_id}`).text()
+        
+          const trimcount=parseInt(likes)
+          
+          
+    
+          $.ajax({
+    
+            type:'POST',
+            url:url,
+            data:{
+              'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+              'post_id':post_id
+            },
+            success:function(response){
+              if(trim == 'Unlike'){
+    
+                $(`.like-btn${post_id}`).text('Like')
+                res=trimcount - 1
+    
+              }
+              else{
+                $(`.like-btn${post_id}`).text('Unlike')
+                res=trimcount+1
+    
+              }
+              $(`.like-count${post_id}`).text(res)
+            },
+            error:function(response){
+              console.log('error',response)
+            }
+          })
+        })
+        
+       </script> 
+    
+
+    </script>
+
+  </div>
+</body>
+</html>

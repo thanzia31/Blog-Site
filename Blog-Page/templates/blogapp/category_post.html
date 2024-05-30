@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+#wrapper{
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+</style>
+
+</head>
+<body>
+
+  
+
+  <div id="wrapper">
+    {% if posts %}
+    {% for i in posts %}
+    <br>
+   
+          
+<div class="w3-content" style="max-width:1400px">
+
+
+
+<!-- Grid -->
+<div class="w3-row"
+
+
+<div style="width:80%;margin-left: -70px;" class="w3-col l8 s12">
+<br><br>
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+<br>
+    <img style="width:30%;height: 150px;" src="{{i.thumbnail.url}}" alt="Nature" style="width:100%">
+   
+      <h2 style="position:relative;margin-top:-120px;margin-left:300px; text-shadow: 2px 2px 5px #000000 "> <font face = "Times New Roman" size = "50">{{i.title}}</font></h2>
+      <h5 style="position:relative;margin-top:-10px;margin-left:450px;"> <a style="text-decoration: none;color: #000000;" href="/authordis/{{i.slug}}" class="w3-opacity">~{{i.author}}</a></h5>
+    
+
+    <div class="w3-container">
+      <br><br>
+      <hr style="border-top: 3px solid #bbb;">
+      <p>{{i.content |safe}}</p>
+      <div class="w3-row">
+        <!--
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+        </div>
+      -->
+      {% if login %}
+        <form action="{% url 'like_post' i.id  %}" method="POST" id="{{i.id}}" class="like-form">
+            {% csrf_token %}
+    
+            <div class="w3-col m8 s12">
+    
+            <button type="submit"  class="ui button like-btn{{i.id}}" >
+    
+            {% if i.like_field %}
+                Unlike
+            {% else %}
+                Like
+           
+            {% endif %}
+          </button>
+        </div>
+            <br><br>
+            <t style="position: relative;bottom:0px;margin-left: 600px;font-size: medium;font-weight: bold;">Likes:</t>
+            <div style="position: relative;bottom: 25px;margin-left: 650px;font-size: large;font-weight: bold;" class="like-count{{i.id}}">
+              
+            <t>{{i.likes.count}}</t>
+            </div>
+          </form>
+          {% else %}
+          <button>Like</button>
+          <t style="margin-left: 350px;">Likes:{{i.likes.count}}</t>
+          {% endif %}
+          <t style="font-size:10px;margin-top:90px;margin-left :350px;position:relative;">{{i.timestamp}}</t>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+ 
+ 
+ 
+<!-- END BLOG ENTRIES -->
+</div>
+
+
+        <br><br>
+        
+        {% endfor %}
+        {% else %}
+        <center>
+          <h1>No posts Available!!!!</h1>
+        </center>
+        {% endif %}
+        <br><br><br>
+        
+    
+        <table style="width:30%;color:black;margin-left:800px;position: absolute;top:60px;" class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Other Latest categories</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in cat %}
+            <tr>
+              
+             <td> <a style="color: black;" href="/post/{{i.slug}}">{{i.title}}</a></td>
+              
+            </tr>
+            
+            {% endfor %}
+      
+      </tbody>
+      </table>
+      
+      {% if login %}
+      <a style="color: #000000;font-size: larger;margin-left:800px;position: absolute;top:400px;" href="/accounts/login/index1">←Home</a>
+      {% else %}
+      <a style="color: #000000;font-size: larger;margin-left:800px;position: absolute;top:400px;" href="/">←Home</a>
+        {% endif %}
+   
+  
+    
+        <script src="https://code.jquery.com/jquery-3.5.1.js" 
+              integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+                crossorigin="anonymous"></script>
+    
+    
+       <script type="text/javascript">
+       
+        $('.like-form').submit(function(e)
+        {
+          e.preventDefault()
+          
+          const post_id=$(this).attr('id')
+          const likeText=$(`.like-btn${post_id}`).text()
+          const trim=$.trim(likeText)
+          console.log(trim)
+          const url = $(this).attr('action')
+          let res;
+          const likes = $(`.like-count${post_id}`).text()
+        
+          const trimcount=parseInt(likes)
+          
+          
+    
+          $.ajax({
+    
+            type:'POST',
+            url:url,
+            data:{
+              'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+              'post_id':post_id
+            },
+            success:function(response){
+              if(trim == 'Unlike'){
+    
+                $(`.like-btn${post_id}`).text('Like')
+                res=trimcount - 1
+    
+              }
+              else{
+                $(`.like-btn${post_id}`).text('Unlike')
+                res=trimcount+1
+    
+              }
+              $(`.like-count${post_id}`).text(res)
+            },
+            error:function(response){
+              console.log('error',response)
+            }
+          })
+        })
+        
+       </script> 
+    
+
+
+    </script>
+
+  </div>
+
+  
+</body>
+</html>
