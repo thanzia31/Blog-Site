@@ -20,9 +20,17 @@ The platform is mainly used to connect people and share their experiences to hel
 - **Framework:** TensorFlow
 - **Functionality:** When a user uploads images, the model verifies the image content before allowing the post to be published. If the images do not meet the criteria, a message is displayed, prompting the user to upload a different image.
 
+##### Working of machine learning models
+[View Demo Video](https://example.com)
+
+
 ## Security Features
 - **OTP Verification:** Enhances security by requiring users to verify their email address via a One-Time Password (OTP) during registration. This ensures that the email provided is valid and owned by the user.
 - **Email Validation:** Ensures that each user registers with a valid, unique email address. Only one account per email is allowed, preventing duplicate registrations and ensuring accountability.
+
+##### Process of OTP verification
+[View Demo Video](https://example.com)
+
 
 ## Features
 
@@ -47,6 +55,14 @@ The platform is mainly used to connect people and share their experiences to hel
 ### User Interaction
 - **Connect with Authors:** Users can connect with authors via email or a provided link. This feature fosters community interaction and allows users to seek further information or collaboration.
 
+##### Exploring features of website
+- If new registered user wants to write a blog
+   [View Demo Video](https://example.com)
+- Other features
+   [View Demo Video](https://example.com)
+
+
+
 ## Installation
 
 ### Prerequisites
@@ -54,7 +70,7 @@ The platform is mainly used to connect people and share their experiences to hel
 - Django
 - Required Python libraries (listed in `requirements.txt`)
 
-##### Steps
+## Steps
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/yourusername/your-repo-name.git
