@@ -2,7 +2,7 @@
 
 # Blog Page with Machine Learning Integration
 
-![Blog Page Screenshot](Blog-Site/blog/media/images/logo_blogpage_ybUbI2u.png "Blog Page Screenshot")
+![Blog Page Screenshot](Blog-Page/media/images/logo_blogpage_psEudMk.png "Blog Page Screenshot")
 
 ## Overview
 This project is a feature-rich blog page designed to enhance content verification using machine learning models. The platform integrates separate models for text and image content verification, ensuring the quality and relevance of the posts before they are published. The blog also incorporates robust security measures and various user functionalities to provide an engaging and secure experience.
