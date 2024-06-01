@@ -21,7 +21,7 @@ The platform is mainly used to connect people and share their experiences to hel
 - **Functionality:** When a user uploads images, the model verifies the image content before allowing the post to be published. If the images do not meet the criteria, a message is displayed, prompting the user to upload a different image.
 
 ##### Working of machine learning models
-[View Demo Video](https://example.com)
+[View Demo Video](https://drive.google.com/file/d/1DkxVCK8zi9ENJseU8iuelb3N207Q5Kpu/view?usp=sharing)
 
 
 ## Security Features
@@ -29,7 +29,7 @@ The platform is mainly used to connect people and share their experiences to hel
 - **Email Validation:** Ensures that each user registers with a valid, unique email address. Only one account per email is allowed, preventing duplicate registrations and ensuring accountability.
 
 ##### Process of OTP verification
-[View Demo Video](https://example.com)
+[View Demo Video](https://drive.google.com/file/d/1PXzw7fLmqxHhsobkWAVN8OhagPJTRylx/view?usp=drive_link)
 
 
 ## Features
@@ -57,9 +57,9 @@ The platform is mainly used to connect people and share their experiences to hel
 
 ##### Exploring features of website
 - If new registered user wants to write a blog
-   [View Demo Video](https://example.com)
+   [View Demo Video](https://drive.google.com/file/d/18yZEiBF-EL6fdUmwAoeLAqXZq7xDCf_s/view?usp=drive_link)
 - Other features
-   [View Demo Video](https://example.com)
+   [View Demo Video](https://drive.google.com/file/d/1Z50iLg24MKBb4H1DA3eZLH3btJCqfy68/view?usp=drive_link)
 
 
 
