@@ -73,8 +73,8 @@ The platform is mainly used to connect people and share their experiences to hel
 ## Steps
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/thanzia31/Blog-Site.git
+   cd Blog-Site
 2. **Create a virtual environment:**
    ```bash
    python -m venv env
